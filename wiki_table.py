@@ -1,13 +1,5 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sun Mar 29 14:47:21 2020
-
-@author: xx-Ol
-"""
-
-
-# -*- coding: utf-8 -*-
-"""
 Created on Tue Mar 24 07:52:14 2020
 
 @author: xx-Ol
@@ -25,6 +17,7 @@ python wikipedia_page.py
 import requests
 from bs4 import BeautifulSoup
 import csv
+
 
 cookies = {
     'WMF-Last-Access': '24-Mar-2020',
@@ -48,53 +41,49 @@ response = requests.get('https://en.wikipedia.org/wiki/List_of_countries_by_elec
 soup = BeautifulSoup(response.content, features="html.parser")
 
 #getting table title 
-title = soup.title.text
-print(title)
+def get_title(soup):  
+    title = soup.title.text
+    return title
+    #print(title)
 
 #getting table body located within <tbody> tag
 #getting the first table from the page using [0]
-table_body = soup.find_all('tbody')[0] 
-
-table_text = table_body.text
+def get_body(soup):
+    table_body = soup.find_all('tbody')[0] 
+    return table_body
+#table_text = table_body.text
 #print(table_text)
 
 
-#writing content of the table into rows list
-rows = []
-
 #Column names found within <th> table header tags
-column_names = []
-for column in  table_body.findAll('th'):    
-    column_t = column.text
-    column_names.append(str(column_t).strip('\n').replace('\n',''))
-        
-#column names written into rows list 
-rows.append(column_names)
-        
-#rows located within <tr> tag  
-#appended to rows list 
-for row in table_body.find_all('tr')[1:]:  
-    cells = []
-    rows.append(cells)
-    #cells located within <td> tag
-    for cell in row.find_all('td'):
-        cell_text = cell.text
-        cell_text = cell_text.strip('\n')
-        cell_text = cell_text.strip(',')
-        if ',' in cell_text:
-            cell_text = '"'+ str(cell_text) +'"'
-        cells.append(cell_text)
-
-# #display rows        
-# for row in rows:        
-#     row = ",".join(row)
-#     print(row)
-            
+def get_content(soup):    
+    #global column_names
+    column_names = []
+    for column in  get_body(soup).findAll('th'):    
+        column_t = column.text
+        column_names.append(str(column_t).strip('\xa0\n').replace('\n',''))       
+#writing content of the table into rows list 
+    rows = []      
+    #column names written into rows list 
+    rows.append(column_names)    
+    #rows located within <tr> tag  
+    #appended to rows list 
+    for row in get_body(soup).find_all('tr')[1:]: #ignoring first blank line  
+        cells = []
+        rows.append(cells)
+        #cells located within <td> tag
+        for cell in row.find_all('td'):
+            cell_text = cell.text
+            cell_text = cell_text.strip(',\n')
+            #cell_text = cell_text.strip(',')
+            if ',' in cell_text:
+                cell_text = '"'+ str(cell_text) +'"'
+            cells.append(cell_text)
+    return rows
+         
 #save as csv file 
-#add newline = '' to prevent new line from being written             
+#add newline = '' to prevent new line from being written         
 with open('wiki2.csv', 'w',newline = '') as file: 
     writer = csv.writer(file)
-    writer.writerows(rows)
-
-
+    writer.writerows(get_content(soup)) # should I call a function or just declare column as a global variable?
 
