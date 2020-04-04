@@ -47,8 +47,10 @@ class TestWikipedia(unittest.TestCase):
 #confirm number of rowsin csv
     def testRowNumersinCSV(self):
         expected = 220
-        result = len([row for row in open('wiki2.csv')])
-        self.assertEqual(expected, result)    
+        file = open('wiki2.csv')
+        result = len(file.readlines())
+        self.assertEqual(expected, result)  
+        file.close()
         
 # #confirm number of columnsin csv
 #     def testColumnsNumersinCSV(self):        
