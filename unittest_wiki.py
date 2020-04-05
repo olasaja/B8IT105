@@ -4,6 +4,17 @@ Created on Mon Mar 30 21:58:47 2020
 
 @author: 10540429
 Unittest for wiki table 
+1.Testing URL response
+2.Testing content
+3.Testing BeautifulSoup object
+4.Testing number of rows
+5.Testing nmber of columns
+6.Testing if csv written to directory
+7.Testing rows match in CSV
+8.Testing columsn match in CSV
+9.Testing content in csv 
+
+Github location: https://github.com/olasaja/B8IT105
 """
 
 import wiki_table # program to be tested 

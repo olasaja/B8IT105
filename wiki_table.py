@@ -2,7 +2,7 @@
 """
 Created on Tue Mar 24 07:52:14 2020
 
-@author: xx-Ol
+@author: 10540429
 
 Website:  https://en.wikipedia.org/wiki/List_of_countries_by_electricity_consumption
 
@@ -12,6 +12,8 @@ python wikipedia_page.py
 
 1. Upload to gitHub
 2. Write unittest
+
+Github location : https://github.com/olasaja/B8IT105
 """
 
 import requests
