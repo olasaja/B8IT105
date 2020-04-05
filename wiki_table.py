@@ -44,7 +44,8 @@ soup = BeautifulSoup(response.content, features="html.parser")
 def get_title(soup):  
     title = soup.title.text
     return title
-    #print(title)
+
+print(get_title(soup))
 
 #getting table body located within <tbody> tag
 #getting the first table from the page using [0]
@@ -63,27 +64,30 @@ def get_content(soup):
         column_t = column.text
         column_names.append(str(column_t).strip('\xa0\n').replace('\n',''))       
 #writing content of the table into rows list 
-    rows = []      
+    content = []      
     #column names written into rows list 
-    rows.append(column_names)    
+    content.append(column_names)    
     #rows located within <tr> tag  
     #appended to rows list 
     for row in get_body(soup).find_all('tr')[1:]: #ignoring first blank line  
         cells = []
-        rows.append(cells)
+        content.append(cells)
         #cells located within <td> tag
         for cell in row.find_all('td'):
             cell_text = cell.text
-            cell_text = cell_text.strip(',\n')
-            #cell_text = cell_text.strip(',')
+            cell_text = cell_text.strip('\xa0,\n')
             if ',' in cell_text:
                 cell_text = '"'+ str(cell_text) +'"'
             cells.append(cell_text)
-    return rows
-         
+    return content
+
+content = get_content(soup)   
+for row in content:
+     row = ",".join(row)      
+     print(row)
+     
 #save as csv file 
 #add newline = '' to prevent new line from being written         
 with open('wiki2.csv', 'w',newline = '') as file: 
     writer = csv.writer(file)
-    writer.writerows(get_content(soup)) # should I call a function or just declare column as a global variable?
-
+    writer.writerows(get_content(soup))
