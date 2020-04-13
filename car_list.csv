@@ -1,0 +1,43 @@
+type ,CarID,Car__make,Car__model,Status
+Petrol,1,Ford,Fiesta,Available
+Petrol,2,Ford,Focus,Available
+Petrol,3,Reliant,Robin,Available
+Petrol,4,Citroen,,Available
+Petrol,5,BMW,,Available
+Petrol,6,Mazda,RX8,Available
+Petrol,7,Nissan,Micra,Available
+Petrol,8,Fiat,Panda,Available
+Petrol,9,Fiat,Punto,Available
+Petrol,10,Kia ,Picanto,Available
+Petrol,11,Peugeot,206,Available
+Petrol,12,Peugeot,207,Available
+Petrol,13,Peugeot,208,Available
+Petrol,14,Peugeot,209,Available
+Petrol,15,Renault,Clio,Available
+Petrol,16,Renault,Kadjar,Available
+Petrol,17,Volkswagen,Polo,Available
+Petrol,18,Opel,Astra,Available
+Petrol,19,Volkswagen,Passat,Available
+Petrol,20,Skoda,Oktavia,Available
+Electric,21,Audi,e-tron,Available
+Electric,22,BMW,i3,Available
+Electric,23,Nissan,Leaf,Available
+Electric,24,Opel,Corsa,Available
+Electric,25,Volkswagen,e-Golf,Available
+Electric,26,Hyundai,Ioniq,Available
+Electric,27,Ford,Kuga,Available
+Electric,28,Tesla,Model 3,Available
+Diesel,29,Volkswagen,Golf,Available
+Diesel,30,Volkswagen,Polo,Available
+Diesel,31,Skoda ,Octavia,Available
+Diesel,32,Renault,Megane,Available
+Diesel,33,Ford ,Focus,Available
+Diesel,34,Ford,Fiesta,Available
+Diesel,35,Opel,Astra,Available
+Diesel,36,BRW,5,Available
+Diesel,37,Audi,A6,Available
+Diesel,38,Audi,A5,Available
+Hybrid,39,Toyota,Corolla,Available
+Hybrid,40,Toyota,C-HR,Available
+Hybrid,41,Ford,Mondeo,Available
+Hybrid,42,Toyota,Yaris,Available
