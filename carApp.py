@@ -10,6 +10,7 @@ program = Dealership()
 #program.create_current_stock()
 #program.save_stock_state()   
 program.load_car_stock()
+print(program.load_car_stock())
 
 def main():
     print('This is a car rental place')
@@ -38,7 +39,7 @@ def main():
         answer = input(msg)
         
         
-main()
+#main()
 
 
 
