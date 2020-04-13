@@ -2,18 +2,13 @@
 """
 Created on Sun Apr  5 10:30:38 2020
 
-@author: xx-Ol
+@author: 10540429
 """
 from  Car3 import Car, ElectricCar, PetrolCar,HybridCar, DieselCar, Dealership 
 
 
 program = Dealership()
-program.create_current_stock()
-# for car in program.getPetrolCars():
-#      print(car)
-#print(program.getDieselCars())
-#program.save_stock_state()   
-#program.load_car_stock()
+program.load_current_stock()
 
 def main():
     print('This is a car rental place')
@@ -32,11 +27,13 @@ def main():
             program.viewCarOptions(car_list)
             carID = str(input('select carID to rent'))
             program.process_rental(car_list, carID)
-            #program.save_stock_state()                                 
+            program.save_stock_state()                                 
         elif answer == '2':
-            type = input('what type of car do you want to return p/e/d/h').upper()
-            program.returnCar(type) 
-            #program.save_stock_state()
+            car_list = input('what type of car do you want to return p/e/d/h').upper()
+            program.viewRentedCars(car_list)
+            carID = str(input('select carID to return'))
+            program.process_return(car_list, carID) 
+            program.save_stock_state()
         elif answer == '3':
             program.stock_count()
             program.stock_count_available()

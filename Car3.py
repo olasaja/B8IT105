@@ -2,7 +2,7 @@
 """
 Created on Fri Apr 10 19:48:37 2020
 
-@author: xx-Ol
+@author: 10540429
 """
 import csv
 
@@ -105,7 +105,7 @@ class Dealership(object):
         self.__hybrid_cars = []
         
     
-    def create_current_stock(self):
+    def load_current_stock(self):
         with open('car_list.csv', newline = '') as file:
             reader = csv.reader(file)
             for line in reader:                
@@ -136,7 +136,23 @@ class Dealership(object):
                         car.setMake(line[2])
                         car.setModel(line[3])
                         car.setStatus(line[4]) 
-                        self.__hybrid_cars.append(car)         
+                        self.__hybrid_cars.append(car)  
+                        
+    def save_stock_state(self):
+        car = ""
+        csv_columns = ['carType','CarID', 'Make','Model','RentalStatus']
+        with open('car_list.csv', 'w', newline='') as file:
+            writer = csv.writer(file)
+            writer.writerow(csv_columns) 
+            for car in self.__petrol_cars:
+                writer.writerow(('Petrol', car.getCarID(),car.getMake() ,car.getModel(),car.getStatus()))
+            for car in self.__electric_cars:
+                writer.writerow(('Electric', car.getCarID(),car.getMake() ,car.getModel(),car.getStatus())) 
+            for car in self.__diesel_cars:
+                writer.writerow(('Diesel',car.getCarID(),car.getMake(),car.getModel(),car.getStatus()))
+            for car in self.__hybrid_cars:
+                writer.writerow(('Hybrid', car.getCarID(),car.getMake() ,car.getModel(),car.getStatus()))
+                
                         
     def getPetrolCars(self):
         return self.__petrol_cars
@@ -172,58 +188,21 @@ class Dealership(object):
         print('Number of available Diesel Cars : ' + str(self.count_available_stock(self.__diesel_cars)))
         print('Number of available Hybrid Cars : ' + str(self.count_available_stock(self.__hybrid_cars)))
         
-    def save_stock_state(self):
-        line = ""
-        csv_columns = ['carType','CarID', 'Make','Model','RentalStatus']
-        with open('car_list.csv', 'w', newline='') as file:
-            writer = csv.writer(file)
-            writer.writerow(csv_columns) 
-            for line in self.__petrol_cars:
-                writer.writerow(('petrol', line))
-            for line in self.__electric_cars:
-                writer.writerow(('electric', line))  
-            for line in self.__diesel_cars:
-                writer.writerow(('diesel', line))
-            for line in self.__hybrid_cars:
-                writer.writerow(('hybrid', line))
-                
-    def load_car_stock(self):
-        with open('car_list.csv', newline = '') as file:
-            car_list = csv.reader(file)
-            for car in car_list:
-                if car[0] == 'petrol':
-                    self.__petrol_cars.append(car)    
-                if car[0] == 'electric':
-                    self.__electric_cars.append(car)  
-                if car[0] == 'diesel':
-                    self.__diesel_cars.append(car)  
-                if car[0] == 'hybrid':
-                    self.__hybrid_cars.append(car)                         
 
     def rent(self, car_list, carID):
             for car in car_list:
                  if car.getCarID() == carID:
-                    print(car.getStatus())
+                    #print(car.getStatus())
                     car.setStatus('Rented')
-                    print('Car status:' + str(car.getStatus()))
+                    print('Car rented. New Car status:' + str(car.getStatus()))
     
     def returnCar(self,car_list, carID):
         for car in car_list:
             if car.getCarID() == carID:
-                print(car.getStatus())
+                #print(car.getStatus())
                 car.setStatus('Available')
-                print('Car status:' + str(car.getStatus()))
+                print('Car Returned. New car status:' + str(car.getStatus()))
         
-    def selectCarType(self,answer):
-        if answer == 'P':
-            self.getPetrolCars()
-        elif answer == 'E':   
-            self.getElectricCars()
-        elif answer == 'D':   
-            self.getDieselCars()
-        elif answer == 'H':   
-            self.getHybridCars() 
-            
     def viewCarOptions(self,car_list):
         if car_list == 'P':
             for car in self.getPetrolCars():
@@ -237,6 +216,24 @@ class Dealership(object):
         elif car_list == 'H':   
             for car in self.getHybridCars():
                 print(car)
+                
+    def viewRentedCars(self,car_list):
+        if car_list == 'P':
+            for car in self.getPetrolCars():
+                if car.getStatus() == 'Rented':
+                    print(car)
+        elif car_list == 'E':   
+            for car in self.getElectricCars():
+                if car.getStatus() == 'Rented':
+                    print(car)
+        elif car_list == 'D':   
+            for car in self.getDieselCars():
+                if car.getStatus() == 'Rented':
+                    print(car)
+        elif car_list == 'H':   
+            for car in self.getHybridCars():
+                if car.getStatus() == 'Rented':
+                    print(car)
         
     def process_rental(self, car_list, carID):
         if car_list == 'P':
@@ -250,7 +247,7 @@ class Dealership(object):
         #self.stock_count()
         #self.stock_count_available()
             
-     def process_return(self, car_list, carID):
+    def process_return(self, car_list, carID):
         if car_list == 'P':
             self.returnCar(self.__petrol_cars,carID)
         elif car_list == 'E':   
