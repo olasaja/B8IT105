@@ -37,7 +37,7 @@ class TestMyCalculator(unittest.TestCase):
     
     def testDivZero(self):
         expected_result = None
-        self.assertEqual(self.cal.div(self.x,[0,5,6,0]),expected_result)
+        self.assertEqual(self.cal.div(self.x,[0,2,2,0]),expected_result)
         
     def testPwr(self):
         expected_result =  [1.0, 0.012345679012345678, 15625, 4747561509943]

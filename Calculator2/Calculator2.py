@@ -44,7 +44,7 @@ class Calculator:
             div = lambda x,y: x/y
             return list(map(div, x, y))
         except ZeroDivisionError:
-            print('Can''t divide by Zero')
+            print('Division by Zero')
     
     def pwr(self, x,y):
         'Function to return the power of  list of numbers'
@@ -67,7 +67,7 @@ class Calculator:
     def sqrt(self, x):
         'Function to return square root of a  list of numbers'
         sqrt = lambda x : x**(0.5)
-        return list(map(sqrt, x))
+        return list(map(sqrt, filter(lambda x:x > 0, x)))
     
     def operations_two(self, operation,x,y):
         if operation == 'A':
